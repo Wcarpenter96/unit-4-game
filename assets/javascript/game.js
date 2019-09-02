@@ -1,6 +1,10 @@
 var selectedPlayer = false;
 var selectedEnemy = false;
 
+var enemyHP
+var playerHP
+var attackPower
+
 var $Earth = $("#Earth")
 var $Fire = $("#Fire")
 var $Air = $("#Air")
@@ -41,17 +45,31 @@ $('.element').on('click', function () {
     }
     if (selectedPlayer && !selectedEnemy) {
         if (!$(this).hasClass("player")) {
-        $(this).addClass("offset-4 enemy")
-        selectedEnemy = true
+            $(this).addClass("offset-4 enemy")
+            selectedEnemy = true
+            enemyHP = $('.enemy').data('health')
+            playerHP = $('.player').data('health')
+            attackPower = $('.player').data('attack')
         }
     }
 });
 
-$(document).on("click",".player",function(){
+$('#Attack').on('click', function () {
+
+    enemyHP -= attackPower
+    playerHP -= $('.enemy').data('counter')
+    attackPower += 2
+    console.log('Enemy HP: ' + enemyHP)
+    console.log('Player HP: ' + playerHP)
+});
+
+
+$(document).on("click", ".player", function () {
     console.log('player')
 });
 
-$(document).on("click",".enemy",function(){
+$(document).on("click", ".enemy", function () {
     console.log('enemy')
 });
+
 
