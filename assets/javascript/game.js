@@ -16,7 +16,8 @@ console.log('Select Player')
 
 $('.element').on('click', function () {
     if (!selectedPlayer) {
-        $(this).addClass("offset-8 player")
+        $(this).addClass("player")
+        $(this).appendTo("#player")
         selectedPlayer = true
         if ($Water.hasClass('player')) {
             $Water.data({
@@ -111,7 +112,8 @@ $('.element').on('click', function () {
     }
     if (selectedPlayer && !selectedEnemy) {
         if (!$(this).hasClass("player")) {
-            $(this).addClass("offset-4 enemy")
+            $(this).addClass("enemy")
+            $(this).appendTo("#enemy")
             selectedEnemy = true
             enemyHP = $('.enemy').data('health')
             $('#Attack').attr('disabled', false);
@@ -139,12 +141,6 @@ $('#Attack').on('click', function () {
         if (enemiesDead == 3) {
             console.log('You Win!')
             GameOver();
-            if (playerHP == 0) {
-                console.log('*Special Acheivement: LAST STAND*')
-            }
-            if (playerHP == 30) {
-                console.log('*Special Acheivement: STRATEGIST*')
-            }
         }
         else {
             selectedEnemy = false;
@@ -157,7 +153,8 @@ $('#Attack').on('click', function () {
 
 function GameOver() {
     $('#Attack').attr('disabled', true);
-    $('.element').removeClass('offset-4 offset-8 enemy player')
+    $('.element').removeClass('enemy player')
+    $('.element').appendTo("#house")
     $('.element').show('slow');
     selectedPlayer = false;
     selectedEnemy = false;
