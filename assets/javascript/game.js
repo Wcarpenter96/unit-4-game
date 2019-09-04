@@ -5,14 +5,15 @@ var enemiesDead = 0;
 var enemyHP
 var playerHP
 var attackPower
+var ATKstat = ''
+var DEFstat = ''
 
 var $Water = $("#Water")
 var $Fire = $("#Fire")
 var $Air = $("#Air")
 var $Earth = $("#Earth")
 
-$('#Attack').attr('disabled', true);
-console.log('Select Player')
+$('#playerMessage').text('Select your Element')
 
 $('.element').on('click', function () {
     if (!selectedPlayer) {
@@ -64,26 +65,26 @@ $('.element').on('click', function () {
             });
 
         } else if ($Air.hasClass('player')) {
-                $Water.data({
-                    health: 100,
-                    attack: 10,
-                    counter: 5,
-                });
-                $Fire.data({
-                    health: 50,
-                    attack: 10,
-                    counter: 15,
-                });
-                $Air.data({
-                    health: 100,
-                    attack: 10,
-                    counter: 10,
-                });
-                $Earth.data({
-                    health: 150,
-                    attack: 10,
-                    counter: 10,
-                });
+            $Water.data({
+                health: 100,
+                attack: 10,
+                counter: 5,
+            });
+            $Fire.data({
+                health: 50,
+                attack: 10,
+                counter: 15,
+            });
+            $Air.data({
+                health: 100,
+                attack: 10,
+                counter: 10,
+            });
+            $Earth.data({
+                health: 150,
+                attack: 10,
+                counter: 10,
+            });
         } else {
             $Water.data({
                 health: 50,
@@ -107,8 +108,19 @@ $('.element').on('click', function () {
             });
         }
         playerHP = $('.player').data('health')
+        $('#playerMessage').text('Player HP: ' + playerHP)
         attackPower = $('.player').data('attack')
-        console.log('Select Enemy')
+        var $attack = $('<button>')
+        $attack.text('Attack')
+        $($attack).appendTo("#player")
+        $($attack).addClass('attack')
+        $($attack).attr('onclick','Attack()')
+        $('.attack').attr('disabled', true);
+        ShowStats($Water);
+        ShowStats($Fire);
+        ShowStats($Air);
+        ShowStats($Earth);
+        $('#enemyMessage').text('Select your Opponent')
     }
     if (selectedPlayer && !selectedEnemy) {
         if (!$(this).hasClass("player")) {
@@ -116,43 +128,58 @@ $('.element').on('click', function () {
             $(this).appendTo("#enemy")
             selectedEnemy = true
             enemyHP = $('.enemy').data('health')
-            $('#Attack').attr('disabled', false);
-            console.log(enemyHP)
+            $('.attack').attr('disabled', false);
+            $('#enemyMessage').text('Enemy HP: ' + enemyHP)
         }
     }
 });
 
-$('#Attack').on('click', function () {
+function ShowStats($element){
+    switch($element.data('health')){
+        case 150: $('.ATKstats').text('ATK+1')
+        case 100: $('.ATKstats').text('ATK+0')
+        case 50: $('.ATKstats').text('ATK-1')
+    }
+    switch($element.data('counter')){
+        case 15: $('.DEFstats').text('DEF+1')
+        case 10: $('.DEFstats').text('DEF+0')
+        case 5: $('.DEFstats').text('DEF-1')
+    }
+}
+
+function Attack() {
     enemyHP -= attackPower
     attackPower += 2
     if (enemyHP > 0) {
         playerHP -= $('.enemy').data('counter')
+        $('#playerMessage').text('Player HP: ' + playerHP)
+        $('#enemyMessage').text('Enemy HP: ' + enemyHP)
         if (playerHP <= 0) {
-            console.log('You lose')
+            $('#enemyMessage').text('You Lose!')
+            $('#playerMessage').text('Select your Element')
             GameOver();
         }
     }
     else {
         console.log('enemy dead')
-        $('#Attack').attr('disabled', true);
+        $('.attack').attr('disabled', true);
         $('.enemy').hide('slow');
         $('.element').removeClass('enemy')
         enemiesDead++
         if (enemiesDead == 3) {
-            console.log('You Win!')
+            $('#enemyMessage').text('You Win!')
+            $('#playerMessage').text('Select another Element')
             GameOver();
         }
         else {
             selectedEnemy = false;
-            console.log('Select Another Enemy')
+            $('#enemyMessage').text('Select another Opponent')
         }
     }
-    console.log('Enemy HP: ' + enemyHP)
-    console.log('Player HP: ' + playerHP)
-});
+}
 
 function GameOver() {
-    $('#Attack').attr('disabled', true);
+    $('.attack').remove()
     $('.element').removeClass('enemy player')
     $('.element').appendTo("#house")
     $('.element').show('slow');

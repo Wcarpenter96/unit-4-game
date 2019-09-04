@@ -12,27 +12,58 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div id="house" class="col bg-dark">
+            <div id="house" class="col bg-light">
                 <div id="Water" class="element col-4">
-                    <img src="assets/images/water.jpg" alt="water">
+                    <img src="assets/images/water.png" alt="water">
+                    <div class="row">
+                        <div class="banner">
+                            <h3>Water</h3>
+                            <h3 class="ATKstats"></h3>
+                            <h3 class="DEFstats"></h3>
+                        </div>
+                    </div>
                 </div>
                 <div id="Fire" class="element col-4">
-                    <img src="assets/images/fire.jpg" alt="fire">
+                    <img src="assets/images/fire.png" alt="fire">
+                    <div class="row">
+                        <div class="banner">
+                            <h3>Fire</h3>
+                            <h3 class="ATKstats"></h3>
+                            <h3 class="DEFstats"></h3>
+                        </div>
+                    </div>
                 </div>
                 <div id="Air" class="element col-4">
-                    <img src="assets/images/air.jpg" alt="air">
+                    <img src="assets/images/air.png" alt="air">
+                    <div class="row">
+                        <div class="banner">
+                            <h3>Air</h3>
+                            <h3 class="ATKstats"></h3>
+                            <h3 class="DEFstats"></h3>
+                        </div>
+                    </div>
                 </div>
                 <div id="Earth" class="element col-4">
-                    <img src="assets/images/earth.jpg" alt="earth">
+                    <img src="assets/images/earth.png" alt="earth">
+                    <div class="row">
+                        <div class="banner">
+                            <h3>Earth</h3>
+                            <h3 class="ATKstats"></h3>
+                            <h3 class="DEFstats"></h3>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="enemy" class="col bg-danger"></div>
-            <div id="player" class="col bg-primary"></div>
+            <div id="enemy" class="col bg-secondary text-center">
+                <h1 id="enemyMessage"></h1>
+            </div>
+            <div id="player" class="col bg-info text-center">
+                <h1 id="playerMessage"></h1>
+            </div>
         </div>
     </div>
-    <button id="Attack">Attack</button>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="assets/javascript/game.js"></script>

@@ -1,7 +1,49 @@
 img{
     height:200px;
     width:200px;
+    opacity:0.9;
 }
 img:hover{
-    border: 5px solid black;
+    border: 5px solid slategray;
 }
+
+button{
+    position: relative;
+    right: 150px;
+    bottom: 40px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(255, 95, 95);
+    /* opacity:0.8; */
+    /* border-radius: 50%; */
+    /* font */
+    font-size: 10px;
+    color: white;
+    text-align: center;
+}
+button:disabled{
+    background-color:rgb(255, 149, 149);
+}
+
+h1{
+    color:white;
+}
+
+.banner {
+
+    /* layout */
+    position: relative;
+    left: 220px;
+    bottom: 130px;
+    background-color: #4aaaa5;
+    width: 100px;
+    opacity:0.8;
+    border-radius: 25px;
+    /* font */
+    font-size: 10px;
+    color: white;
+    text-align: center;
+}
+
+
+
