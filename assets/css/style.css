@@ -1,49 +1,93 @@
-img{
-    height:200px;
-    width:200px;
-    opacity:0.9;
-}
-img:hover{
-    border: 5px solid slategray;
+* {
+    font-family: 'Rock Salt', cursive;
 }
 
-button{
+body {
+    background-image: url("../images/paper.jpg");
+}
+
+h3 {
+    padding: 40px;
+}
+
+h5 {
+    padding: 10px;
+    opacity: 0.8;
+}
+
+p {
+    opacity: 0.8;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+img:hover {
+    border-radius: 100px !important;
+    border: double 10px black;
+    opacity: 0.8;
+}
+
+button {
     position: relative;
-    right: 150px;
-    bottom: 40px;
-    width: 100px;
-    height: 40px;
-    background-color: rgb(255, 95, 95);
-    /* opacity:0.8; */
-    /* border-radius: 50%; */
+    right: 0px;
+    bottom: 50px;
+    width: 200px;
+    height: 100px;
+    background-color: rgb(113, 156, 77);
+    border-style: outset;
+    border-radius: 10px !important;
     /* font */
-    font-size: 10px;
-    color: white;
-    text-align: center;
-}
-button:disabled{
-    background-color:rgb(255, 149, 149);
+    color:white;
+    text-align:center;
 }
 
-h1{
-    color:white;
+button:enabled:hover {
+    width: 220px;
+    height: 110px;
+}
+
+button:disabled {
+    opacity: 0.5 !important;
+    background-color: rgb(158, 158, 158);
 }
 
 .banner {
-
     /* layout */
     position: relative;
     left: 220px;
-    bottom: 130px;
-    background-color: #4aaaa5;
+    bottom: 150px;
     width: 100px;
-    opacity:0.8;
+    opacity: 0.8;
+    background-color: beige;
     border-radius: 25px;
     /* font */
-    font-size: 10px;
-    color: white;
+    font-size: 10;
+    color: black;
     text-align: center;
+    padding-top: 10px;
 }
 
+#house, #enemy, #player,#achievements{
+    border: double 10px black;
+    margin: 20px;
+    opacity: 0.8;
+}
 
+#house {
+    background-color: rgb(138, 98, 71);
+}
 
+#enemy {
+    background-color: rgb(170, 117, 81);
+}
+
+#player {
+    background-color: rgb(200, 132, 87);
+}
+#achievements{
+    background-color: rgb(167, 98, 52);
+    opacity:0.8;
+}

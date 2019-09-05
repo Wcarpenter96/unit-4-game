@@ -1,6 +1,7 @@
 var selectedPlayer = false;
 var selectedEnemy = false;
 var enemiesDead = 0;
+var elementsMastered = 0;
 
 var enemyHP
 var playerHP
@@ -13,10 +14,13 @@ var $Fire = $("#Fire")
 var $Air = $("#Air")
 var $Earth = $("#Earth")
 
+$('#enemyMessage').text('Welcome to')
+$('#title').text('ELEMENTS')
 $('#playerMessage').text('Select your Element')
 
 $('.element').on('click', function () {
     if (!selectedPlayer) {
+        $('#title').text('')
         $(this).addClass("player")
         $(this).appendTo("#player")
         selectedPlayer = true
@@ -114,12 +118,14 @@ $('.element').on('click', function () {
         $attack.text('Attack')
         $($attack).appendTo("#player")
         $($attack).addClass('attack')
-        $($attack).attr('onclick','Attack()')
+        $($attack).attr('onclick', 'Attack()')
         $('.attack').attr('disabled', true);
         ShowStats($Water);
         ShowStats($Fire);
         ShowStats($Air);
         ShowStats($Earth);
+        $('.player').find('.ATKstats').text('')
+        $('.player').find('.DEFstats').text('')
         $('#enemyMessage').text('Select your Opponent')
     }
     if (selectedPlayer && !selectedEnemy) {
@@ -134,16 +140,22 @@ $('.element').on('click', function () {
     }
 });
 
-function ShowStats($element){
-    switch($element.data('health')){
-        case 150: $('.ATKstats').text('ATK+1')
-        case 100: $('.ATKstats').text('ATK+0')
-        case 50: $('.ATKstats').text('ATK-1')
+function ShowStats($element) {
+    switch ($element.data('health')) {
+        case 150: $element.find('.DEFstats').text('DEF: +1')
+            break;
+        case 100: $element.find('.DEFstats').text('DEF: +0')
+            break;
+        case 50: $element.find('.DEFstats').text('DEF: -1')
+            break;
     }
-    switch($element.data('counter')){
-        case 15: $('.DEFstats').text('DEF+1')
-        case 10: $('.DEFstats').text('DEF+0')
-        case 5: $('.DEFstats').text('DEF-1')
+    switch ($element.data('counter')) {
+        case 15: $element.find('.ATKstats').text('ATK: +1')
+            break;
+        case 10: $element.find('.ATKstats').text('ATK: +0')
+            break;
+        case 5: $element.find('.ATKstats').text('ATK: -1')
+            break;
     }
 }
 
@@ -155,7 +167,7 @@ function Attack() {
         $('#playerMessage').text('Player HP: ' + playerHP)
         $('#enemyMessage').text('Enemy HP: ' + enemyHP)
         if (playerHP <= 0) {
-            $('#enemyMessage').text('You Lose!')
+            $('#enemyMessage').text('You Lose')
             $('#playerMessage').text('Select your Element')
             GameOver();
         }
@@ -167,13 +179,44 @@ function Attack() {
         $('.element').removeClass('enemy')
         enemiesDead++
         if (enemiesDead == 3) {
-            $('#enemyMessage').text('You Win!')
+            Achievement($Water,'Water','blue')
+            Achievement($Fire,'Fire','darkorange')
+            Achievement($Air,'Air','lightblue')
+            Achievement($Earth,'Earth','green')
+            elementsMastered++;
+            if(elementsMastered === 4){
+            $('#enemyMessage').text('You are the')
+            $('#title').text('ELEMENT MASTER')
+            }else{
+            $('#enemyMessage').text('You Win')
             $('#playerMessage').text('Select another Element')
+            }
             GameOver();
         }
         else {
             selectedEnemy = false;
             $('#enemyMessage').text('Select another Opponent')
+        }
+    }
+
+    function Achievement (element,elementClass,color){
+        if (element.hasClass('player') && !$('#achievements').hasClass(elementClass)) {
+            var $achievement = $('<div>')
+            var $title = $('<h5></h5>')
+            $title.text(elementClass + " Master")
+            $achievement.append($title)
+            $achievement.attr({
+                class:'col-1',
+                class:'text-center'
+            })
+            $achievement.css({
+                backgroundColor: color,
+                color: "white",
+                opacity: "0.8",
+                padding: "30px",
+            })
+            $achievement.appendTo("#achievements")
+            $('#achievements').addClass(elementClass)
         }
     }
 }
@@ -183,6 +226,8 @@ function GameOver() {
     $('.element').removeClass('enemy player')
     $('.element').appendTo("#house")
     $('.element').show('slow');
+    $('.ATKstats').text('')
+    $('.DEFstats').text('')
     selectedPlayer = false;
     selectedEnemy = false;
     enemiesDead = 0;
