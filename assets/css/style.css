@@ -1,34 +1,27 @@
 * {
     font-family: 'Rock Salt', cursive;
 }
-
 body {
     background-image: url("../images/paper.jpg");
 }
-
-h3 {
-    padding: 40px;
-}
-
 h5 {
     padding: 10px;
     opacity: 0.8;
 }
-
+h3 {
+    padding: 40px;
+}
 p {
     opacity: 0.8;
 }
-
 img {
     max-width: 30%;
 }
-
 img:hover {
     border-radius: 100px !important;
     border: double 10px black;
     opacity: 0.8;
 }
-
 button {
     position: relative;
     right: 0px;
@@ -42,17 +35,14 @@ button {
     color:white;
     text-align:center;
 }
-
 button:enabled:hover {
     width: 220px;
     height: 110px;
 }
-
 button:disabled {
     opacity: 0.5 !important;
     background-color: rgb(158, 158, 158);
 }
-
 .banner {
     /* layout */
     width: 100px;
@@ -66,20 +56,16 @@ button:disabled {
 .title{
     padding:20px 0px;
 }
-
 #house, #enemy, #player,#achievements{
     border: double 10px black;
     opacity: 0.8;
 }
-
 #house {
     background-color: rgb(117, 85, 63);
 }
-
 #enemy {
     background-color: rgb(170, 117, 81);
 }
-
 #player {
     background-color: rgb(200, 132, 87);
 }

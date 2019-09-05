@@ -15,6 +15,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+            <!-- The "house" is where the unselected elements live -->
             <div id="house" class="col-lg-4">
                 <div id="Water" class="col element text-center">
                     <img src="assets/images/water.png" alt="water">
@@ -57,20 +58,27 @@
                     </div>
                 </div>
             </div>
+
+            <!-- The Enemy Element is moved to this column -->
             <div id="enemy" class="col-lg-4 text-center">
                 <h3 id="enemyMessage"></h3>
                 <h1 id="title"></h1>
             </div>
+
+            <!-- The Player Element is moved to this column -->
             <div id="player" class="col-lg-4 text-center">
                 <h3 id="playerMessage"></h3>
             </div>
         </div>
+
+        <!-- The Achievement Row -->
         <div class="row" id="achievements">
             <div class="col-lg-6">
                 <h3>Achievements:</h3>
             </div>
         </div>
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="assets/javascript/game.js"></script>

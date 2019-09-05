@@ -1,29 +1,34 @@
+// Assigned Variables
 var selectedPlayer = false;
 var selectedEnemy = false;
 var enemiesDead = 0;
 var elementsMastered = 0;
-
+// Variables
 var enemyHP
 var playerHP
 var attackPower
 var ATKstat = ''
 var DEFstat = ''
-
+// JQuery Variables
 var $Water = $("#Water")
 var $Fire = $("#Fire")
 var $Air = $("#Air")
 var $Earth = $("#Earth")
 
+// Setup
 $('#enemyMessage').text('Welcome to')
 $('#title').text('ELEMENTS')
 $('#playerMessage').text('Select your Element')
 
+// When Player selects Element
 $('.element').on('click', function () {
     if (!selectedPlayer) {
+        // Assign the Element 
         $('#title').text('')
         $(this).addClass("player")
         $(this).appendTo("#player")
         selectedPlayer = true
+        // Stats are assigned to the other Elements based on the Player's Element 
         if ($Water.hasClass('player')) {
             $Water.data({
                 health: 100,
@@ -111,28 +116,35 @@ $('.element').on('click', function () {
                 counter: 10,
             });
         }
+        // Player's Element Stats are assigned
         playerHP = $('.player').data('health')
-        $('#playerMessage').text('Player HP: ' + playerHP)
         attackPower = $('.player').data('attack')
-        var $attack = $('<button>')
-        $attack.text('Attack')
-        $($attack).appendTo("#player")
-        $($attack).addClass('attack')
-        $($attack).attr('onclick', 'Attack()')
-        $('.attack').attr('disabled', true);
+        $('#playerMessage').text('Player HP: ' + playerHP)
+        // Display Stats for unselected Elements
         ShowStats($Water);
         ShowStats($Fire);
         ShowStats($Air);
         ShowStats($Earth);
         $('.player').find('.ATKstats').text('')
         $('.player').find('.DEFstats').text('')
+        // Attack Button Setup
+        var $attack = $('<button>')
+        $attack.text('Attack')
+        $($attack).appendTo("#player")
+        $($attack).addClass('attack')
+        $($attack).attr('onclick', 'Attack()')
+        $('.attack').attr('disabled', true);
+        // Prompt User to select opponent 
         $('#enemyMessage').text('Select your Opponent')
     }
+    // When Player selects Enemy
     if (selectedPlayer && !selectedEnemy) {
+        // Assign the Element
         if (!$(this).hasClass("player")) {
             $(this).addClass("enemy")
             $(this).appendTo("#enemy")
             selectedEnemy = true
+            // Assign Element Stats to Enemy Stats
             enemyHP = $('.enemy').data('health')
             $('.attack').attr('disabled', false);
             $('#enemyMessage').text('Enemy HP: ' + enemyHP)
@@ -140,6 +152,7 @@ $('.element').on('click', function () {
     }
 });
 
+//Displays easy-to-read stats for the User
 function ShowStats($element) {
     switch ($element.data('health')) {
         case 150: $element.find('.DEFstats').text('DEF: +1')
@@ -159,6 +172,7 @@ function ShowStats($element) {
     }
 }
 
+// When Player attacks Enemy
 function Attack() {
     enemyHP -= attackPower
     attackPower += 2
@@ -166,24 +180,28 @@ function Attack() {
         playerHP -= $('.enemy').data('counter')
         $('#playerMessage').text('Player HP: ' + playerHP)
         $('#enemyMessage').text('Enemy HP: ' + enemyHP)
+        // Enemy beats player
         if (playerHP <= 0) {
             $('#enemyMessage').text('You Lose')
             $('#playerMessage').text('Select your Element')
             GameOver();
         }
     }
+    // Player beats Enemy
     else {
         console.log('enemy dead')
         $('.attack').attr('disabled', true);
         $('.enemy').hide('slow');
         $('.element').removeClass('enemy')
         enemiesDead++
+        // Player beats all three Enemeies
         if (enemiesDead == 3) {
             Achievement($Water,'Water','blue')
             Achievement($Fire,'Fire','darkorange')
             Achievement($Air,'Air','lightblue')
             Achievement($Earth,'Earth','green')
             elementsMastered++;
+            // Player beats all three Enemies with all four Elements
             if(elementsMastered === 4){
             $('#enemyMessage').text('You are the')
             $('#title').text('ELEMENT MASTER')
@@ -199,7 +217,7 @@ function Attack() {
             $('#enemyMessage').text('Select another Opponent')
         }
     }
-
+    // Outputs proper Achievement div in the Achievments row
     function Achievement (element,elementClass,color){
         if (element.hasClass('player') && !$('#achievements').hasClass(elementClass)) {
             var $achievement = $('<div>')
@@ -223,6 +241,7 @@ function Attack() {
     }
 }
 
+// Resets Game
 function GameOver() {
     $('.attack').remove()
     $('.element').removeClass('enemy player')
