@@ -187,6 +187,7 @@ function Attack() {
             if(elementsMastered === 4){
             $('#enemyMessage').text('You are the')
             $('#title').text('ELEMENT MASTER')
+            $('#playerMessage').text('')
             }else{
             $('#enemyMessage').text('You Win')
             $('#playerMessage').text('Select another Element')
@@ -202,7 +203,8 @@ function Attack() {
     function Achievement (element,elementClass,color){
         if (element.hasClass('player') && !$('#achievements').hasClass(elementClass)) {
             var $achievement = $('<div>')
-            var $title = $('<h5></h5>')
+            var $title = $('<p></p>')
+            $title.addClass('title')
             $title.text(elementClass + " Master")
             $achievement.append($title)
             $achievement.attr({

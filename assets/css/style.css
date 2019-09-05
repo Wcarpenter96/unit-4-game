@@ -20,8 +20,7 @@ p {
 }
 
 img {
-    height: 200px;
-    width: 200px;
+    max-width: 30%;
 }
 
 img:hover {
@@ -33,7 +32,7 @@ img:hover {
 button {
     position: relative;
     right: 0px;
-    bottom: 50px;
+    bottom: 0px;
     width: 200px;
     height: 100px;
     background-color: rgb(113, 156, 77);
@@ -56,28 +55,25 @@ button:disabled {
 
 .banner {
     /* layout */
-    position: relative;
-    left: 220px;
-    bottom: 150px;
     width: 100px;
     opacity: 0.8;
-    background-color: beige;
     border-radius: 25px;
     /* font */
     font-size: 10;
     color: black;
-    text-align: center;
     padding-top: 10px;
+}
+.title{
+    padding:20px 0px;
 }
 
 #house, #enemy, #player,#achievements{
     border: double 10px black;
-    margin: 20px;
     opacity: 0.8;
 }
 
 #house {
-    background-color: rgb(138, 98, 71);
+    background-color: rgb(117, 85, 63);
 }
 
 #enemy {
